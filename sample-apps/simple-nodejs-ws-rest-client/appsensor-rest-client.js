@@ -34,7 +34,6 @@ var exports = {
         httpOptions.path = httpOptions.path + "/events";
         httpOptions.method = "POST";
         req = http.request(httpOptions, function () {
-            console.log("Event Posted Successfully.");
         });
 
         req.on('error', function(e) {
@@ -47,7 +46,7 @@ var exports = {
     },
 
     /**
-     * Polls for responses
+     * Poll for responses
      */
     startPollingResponses: function () {
 
@@ -84,8 +83,7 @@ var exports = {
     },
 
     /**
-     * Take action as suggested by AppSensor server in response to event.
-     * Just logs action on console for now
+     * Take action as suggested by AppSensor server in response to events.
      * @param response
      */
     takeAction: function (response) {
