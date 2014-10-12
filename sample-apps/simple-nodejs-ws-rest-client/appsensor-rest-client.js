@@ -19,7 +19,7 @@ var httpOptions = {
 var exports = {
 
     /**
-     * Posts and event to AppSensor Server webService
+     * Posts an event to AppSensor REST Service
      * @param userName
      * @param detectionPoint
      */
@@ -30,10 +30,11 @@ var exports = {
             "'detectionPoint':{'id':'" + detectionPoint + "'}," +
             "'timestamp':'" + Date.now() + "'}";
 
-        // Set up the request
+        // Setup the POST request
         httpOptions.path = httpOptions.path + "/events";
         httpOptions.method = "POST";
         req = http.request(httpOptions, function () {
+
         });
 
         req.on('error', function(e) {
@@ -66,10 +67,10 @@ var exports = {
                     content += chunk;
                 });
 
-                // Once we're done streaming the response, parse it as json.
+                // Once done with streaming the response, parse it as json.
                 response.on("end", function() {
                     var data = JSON.parse(content);
-                    // Take action suggested by appSensor Server
+                    // Take action as suggested by the AppSensor Server
                     this.takeAction(data);
                 });
             });
@@ -83,7 +84,7 @@ var exports = {
     },
 
     /**
-     * Take action as suggested by AppSensor server in response to events.
+     * Take action as suggested by the AppSensor server in response to events.
      * @param response
      */
     takeAction: function (response) {
